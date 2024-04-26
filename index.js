@@ -29,6 +29,13 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    app.get('/items', async(req, res)=>{
+      const cursor = itemCollection.find()
+      const result = await cursor.toArray()
+      res.send(result)
+
+    })
+
     app.post('/items', async(req, res)=>{
       const item = req.body;
       const result = await itemCollection.insertOne(item)
